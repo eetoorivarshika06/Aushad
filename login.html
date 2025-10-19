@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aushad - Welcome</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #004d40;
+    overflow: hidden;
+  }
+  header {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  .brand-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    user-select: none;
+  }
+  main {
+    background: white;
+    padding: 3rem 4rem;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 77, 64, 0.25);
+    text-align: center;
+    min-width: 320px;
+  }
+  h1 {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 2.7rem;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 220px;
+    margin: 2rem auto 0;
+  }
+  button {
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(38, 166, 154, 0.4);
+    background: linear-gradient(45deg, #26a69a, #004d40);
+    color: white;
+  }
+  button:hover {
+    background: linear-gradient(45deg, #004d40, #26a69a);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(38, 166, 154, 0.7);
+  }
+  /* Leaf icon next to Welcome */
+  .leaf-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  .subtitle {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #00796b;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #00796b;
+    letter-spacing: 0.02em;
+    animation: typewriter 2.0s steps(28) forwards;
+    margin-top: 0.5rem;
+    user-select: none;
+  }
+
+  /* --- Responsive Header & Logo --- */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 5px;
+      top: 10px;
+      left: 10px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .brand-name {
+      font-size: 1.5rem;
+    }
+
+    main {
+      padding: 2rem 3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header {
+      gap: 3px;
+    }
+
+    .logo {
+      width: 35px;
+      height: 35px;
+    }
+
+    .brand-name {
+      font-size: 1.3rem;
+    }
+
+    main {
+      padding: 1.5rem 2rem;
+    }
+
+    .btn-group {
+      width: 180px;
+      gap: 15px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      gap: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
+    .leaf-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Aushad logo with three connected leaves">
+    <!-- Central leaf -->
+    <path d="M32 4C24 20 24 44 32 60C40 44 40 20 32 4Z" fill="#26a69a" />
+    <!-- Left leaf -->
+    <path d="M16 24C10 28 8 38 14 44C20 38 19 28 16 24Z" fill="#80cbc4" />
+    <!-- Right leaf -->
+    <path d="M48 24C54 28 56 38 50 44C44 38 45 28 48 24Z" fill="#80cbc4" />
+    <!-- Connecting lines -->
+    <line x1="22" y1="34" x2="42" y2="34" stroke="#004d40" stroke-width="2" />
+    <line x1="32" y1="4" x2="32" y2="60" stroke="#004d40" stroke-width="2" />
+  </svg>
+  <div class="brand-name">Aushad</div>
+</header>
+
+<main>
+  <h1>
+    Welcome to Aushad
+    <svg class="leaf-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M32 4C24 20 24 44 32 60C40 44 40 20 32 4Z" fill="#26a69a"/>
+      <path d="M16 24C10 28 8 38 14 44C20 38 19 28 16 24Z" fill="#80cbc4"/>
+      <path d="M48 24C54 28 56 38 50 44C44 38 45 28 48 24Z" fill="#80cbc4"/>
+      <line x1="22" y1="34" x2="42" y2="34" stroke="#004d40" stroke-width="2"/>
+      <line x1="32" y1="4" x2="32" y2="60" stroke="#004d40" stroke-width="2"/>
+    </svg>
+  </h1>
+  <p class="subtitle">— Your Digital Health Companion.</p>
+  <div class="btn-group">
+    <button onclick="location.href='signup.html'">Guest</button>
+    <button onclick="location.href='signup2.html'">Patient</button>
+  </div>
+</main>
+
+</body>
+</html>

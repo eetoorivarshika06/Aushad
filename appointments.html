@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aushad - Appointments</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* 🌈 Base Styles */
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body {
+  margin:0;
+  min-height:100vh;
+  color:#004d40;
+  background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+  animation:bgAnimate 20s linear infinite alternate;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* 🌊 Animated Gradient Background */
+@keyframes bgAnimate {
+  0% { background: linear-gradient(135deg, #e0f7fa, #b2dfdb); }
+  50% { background: linear-gradient(135deg, #b2ebf2, #80cbc4); }
+  100% { background: linear-gradient(135deg, #e0f7fa, #b2dfdb); }
+}
+
+/* 🌟 Navbar */
+nav {
+  background:#004d40;
+  padding:0.8rem 3rem;
+  display:flex;
+  justify-content:center;
+  gap:3rem;
+  box-shadow:0 3px 6px rgba(0,0,0,0.2);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+nav a {
+  color:#a7ffeb;
+  text-decoration:none;
+  font-weight:600;
+  font-size:1.1rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.3rem;
+  transition:all 0.3s ease;
+}
+nav a:hover { color:#26a69a; transform:scale(1.1); }
+nav a .emoji { font-size:24px; transition:transform 0.3s ease; }
+nav a:hover .emoji { transform:rotate(20deg) scale(1.2); }
+
+.double-line {
+  width:100%;
+  border-top:4px double #004d40;
+  margin:0;
+}
+
+/* 🌿 Container */
+.record-container {
+  width:90%;
+  max-width:850px;
+  background:rgba(255,255,255,0.95);
+  border-radius:25px;
+  box-shadow:0 8px 20px rgba(0,77,64,0.2);
+  text-align:center;
+  padding:2.5rem;
+  margin:3rem auto;
+  animation:fadeInScale 1.2s ease forwards;
+}
+@keyframes fadeInScale {
+  from { opacity:0; transform:scale(0.9); }
+  to { opacity:1; transform:scale(1); }
+}
+
+/* 🗓️ Heading */
+h2 {
+  margin-bottom:1rem;
+  font-size:2.2rem;
+  font-family:'Pacifico', cursive;
+  color:#004d40;
+}
+
+/* Input and Button Styles */
+.input-row {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+  justify-content:center;
+}
+input {
+  flex:1;
+  min-width:150px;
+  padding:10px;
+  border:1.5px solid #b2dfdb;
+  border-radius:10px;
+  font-size:1rem;
+  background:#f9fffe;
+  color:#004d40;
+}
+button {
+  background:linear-gradient(90deg,#26a69a,#80cbc4);
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:10px 20px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+button:hover { background:linear-gradient(90deg,#00796b,#26a69a); }
+
+/* Table */
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:2rem;
+}
+th, td {
+  border-bottom:1px solid #e0f2f1;
+  padding:12px;
+  text-align:center;
+}
+th {
+  background:#26a69a;
+  color:white;
+  font-weight:600;
+}
+td {
+  background:rgba(224,242,241,0.6);
+}
+
+/* Floating Capsules */
+.capsule {
+  position:fixed;
+  border-radius:12px;
+  width:20px;
+  height:12px;
+  background:linear-gradient(90deg,#26a69a 50%,#80cbc4 50%);
+  opacity:0.15;
+  animation:floatUp 15s linear infinite;
+  z-index:1;
+}
+@keyframes floatUp {
+  0% { transform:translateY(100vh) rotate(0deg); opacity:0.1; }
+  50% { opacity:0.3; }
+  100% { transform:translateY(-30vh) rotate(360deg); opacity:0.1; }
+}
+
+/* Responsive */
+@media(max-width:600px){
+  .input-row{flex-direction:column;}
+  nav{gap:1.5rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌟 Navbar -->
+<nav>
+  <a href="home.html"><span class="emoji">🏠</span>Home</a>
+  <a href="medicines.html"><span class="emoji">💊</span>Medicines</a>
+  <a href="appointments.html"><span class="emoji">📅</span>Appointments</a>
+  <a href="reports.html"><span class="emoji">📄</span>Reports</a>
+  <a href="medicalhistory.html"><span class="emoji">🩺</span>Medical History</a>
+  <a href="settings.html"><span class="emoji">⚙️</span>Settings</a>
+</nav>
+<hr class="double-line" />
+
+<!-- 🌿 Main Content -->
+<div class="record-container">
+  <h2>Manage Your Appointments</h2>
+
+  <!-- Form -->
+  <div class="input-row">
+    <input type="text" id="doctorName" placeholder="Doctor Name" />
+    <input type="date" id="appointmentDate" />
+    <input type="text" id="reason" placeholder="Reason" />
+    <button onclick="addAppointment()">Add Appointment</button>
+  </div>
+
+  <!-- Table -->
+  <h2 style="margin-top:2rem;">Your Appointments</h2>
+  <table id="appointmentTable">
+    <thead>
+      <tr>
+        <th>Doctor Name</th>
+        <th>Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="appointmentBody">
+      <tr><td colspan="4" style="color:#00796b;">No appointments yet.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 🌿 Floating Capsules -->
+<script>
+for(let i=0;i<40;i++){
+  const c=document.createElement('div');
+  c.className='capsule';
+  c.style.left=Math.random()*100+'vw';
+  c.style.top=Math.random()*100+'vh';
+  c.style.width=10+Math.random()*25+'px';
+  c.style.height=5+Math.random()*15+'px';
+  c.style.animationDelay=Math.random()*15+'s';
+  document.body.appendChild(c);
+}
+
+// 🩺 Appointment Logic
+let appointments = [];
+
+function addAppointment(){
+  const name=document.getElementById('doctorName').value.trim();
+  const date=document.getElementById('appointmentDate').value;
+  const reason=document.getElementById('reason').value.trim();
+
+  if(!name || !date || !reason){
+    alert("Please fill all fields!");
+    return;
+  }
+
+  const today=new Date();
+  const apptDate=new Date(date);
+  const diffTime=apptDate - today;
+  const diffDays=Math.ceil(diffTime/(1000*60*60*24));
+
+  let status="";
+  if(diffDays < 0){
+    status="Appointment has already expired ❌";
+  } else if(diffDays === 0){
+    status="Appointment is today ✅";
+  } else {
+    status=`${diffDays} day(s) left ⏳`;
+  }
+
+  appointments.push({name,date,reason,status});
+  renderAppointments();
+
+  // Reset inputs
+  document.getElementById('doctorName').value="";
+  document.getElementById('appointmentDate').value="";
+  document.getElementById('reason').value="";
+}
+
+function renderAppointments(){
+  const tbody=document.getElementById('appointmentBody');
+  tbody.innerHTML="";
+  if(appointments.length===0){
+    tbody.innerHTML='<tr><td colspan="4" style="color:#00796b;">No appointments yet.</td></tr>';
+    return;
+  }
+
+  appointments.forEach(appt=>{
+    const row=document.createElement('tr');
+    row.innerHTML=`
+      <td>${appt.name}</td>
+      <td>${appt.date}</td>
+      <td>${appt.reason}</td>
+      <td>${appt.status}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+</script>
+
+</body>
+</html>

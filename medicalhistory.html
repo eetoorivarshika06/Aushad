@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aushad - Medical History</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* 🌈 Base Styles */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #004d40;
+  background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+  animation: bgAnimate 20s linear infinite alternate;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 🌊 Animated Gradient */
+@keyframes bgAnimate {
+  0% { background: linear-gradient(135deg, #e0f7fa, #b2dfdb); }
+  50% { background: linear-gradient(135deg, #b2ebf2, #80cbc4); }
+  100% { background: linear-gradient(135deg, #e0f7fa, #b2dfdb); }
+}
+
+/* 🌟 Navbar */
+nav {
+  background: #004d40;
+  padding: 0.8rem 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav a {
+  color: #a7ffeb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.3s ease;
+}
+nav a:hover { color: #26a69a; transform: scale(1.1); }
+nav a .emoji { font-size: 24px; transition: transform 0.3s ease; }
+nav a:hover .emoji { transform: rotate(20deg) scale(1.2); }
+
+.double-line {
+  width: 100%;
+  border-top: 4px double #004d40;
+  margin: 0;
+}
+
+/* 🌿 Container */
+main {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  width: 90%;
+  max-width: 900px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 20px rgba(0, 77, 64, 0.2);
+  animation: fadeInScale 1.2s ease forwards;
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.3rem;
+  text-align: center;
+  color: #004d40;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+label {
+  font-weight: 600;
+  color: #00695c;
+}
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1.5px solid #b2dfdb;
+  background: #f9fffe;
+  font-size: 1rem;
+  color: #004d40;
+}
+textarea { resize: vertical; min-height: 80px; }
+.date-grid { display: flex; gap: 0.5rem; }
+
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn-primary {
+  background: linear-gradient(90deg, #26a69a, #80cbc4);
+  color: #fff;
+}
+.btn-primary:hover { background: linear-gradient(90deg, #00796b, #26a69a); }
+.btn-danger { background: #e57373; color: #fff; }
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+th, td {
+  border-bottom: 1px solid #e0f2f1;
+  padding: 10px;
+  text-align: left;
+}
+th { color: #00796b; }
+tr:hover { background-color: #f1f8f6; }
+.no-data { text-align: center; color: #00796b; padding: 1rem; }
+
+/* Floating Capsules */
+.capsule {
+  position: fixed;
+  border-radius: 12px;
+  width: 20px;
+  height: 12px;
+  background: linear-gradient(90deg, #26a69a 50%, #80cbc4 50%);
+  opacity: 0.15;
+  animation: floatUp 15s linear infinite;
+  z-index: 1;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0.1; }
+  50% { opacity: 0.3; }
+  100% { transform: translateY(-30vh) rotate(360deg); opacity: 0.1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { width: 100%; padding: 1.5rem; }
+  nav { gap: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+<!-- ✅ Unified Navbar -->
+<nav>
+  <a href="home.html"><span class="emoji">🏠</span>Home</a>
+  <a href="medicines.html"><span class="emoji">💊</span>Medicines</a>
+  <a href="appointments.html"><span class="emoji">📅</span>Appointments</a>
+  <a href="reports.html"><span class="emoji">📄</span>Reports</a>
+  <a href="medicalhistory.html"><span class="emoji">🩺</span>Medical History</a>
+  <a href="settings.html"><span class="emoji">⚙️</span>Settings</a>
+</nav>
+<hr class="double-line" />
+
+<main>
+  <div class="container">
+    <h1>Medical History</h1>
+
+    <form id="entryForm">
+      <div>
+        <label>Medical Issue</label>
+        <input id="issue" type="text" required />
+      </div>
+      <div>
+        <label>Description</label>
+        <textarea id="description"></textarea>
+      </div>
+      <div>
+        <label>Date</label>
+        <div class="date-grid">
+          <select id="day"></select>
+          <select id="month"></select>
+          <select id="year"></select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Record</button>
+    </form>
+
+    <section id="recordsWrap" class="no-data">
+      No medical records yet — add one above.
+    </section>
+  </div>
+</main>
+
+<!-- 🌿 Floating Capsules -->
+<script>
+for(let i=0;i<40;i++){
+  const c = document.createElement('div');
+  c.className='capsule';
+  c.style.left=Math.random()*100+'vw';
+  c.style.top=Math.random()*100+'vh';
+  c.style.width=10+Math.random()*25+'px';
+  c.style.height=5+Math.random()*15+'px';
+  c.style.animationDelay=Math.random()*15+'s';
+  document.body.appendChild(c);
+}
+
+// Script logic
+const dayEl=document.getElementById('day');
+const monthEl=document.getElementById('month');
+const yearEl=document.getElementById('year');
+const form=document.getElementById('entryForm');
+const wrap=document.getElementById('recordsWrap');
+
+function populateDate(){
+  for(let d=1;d<=31;d++){let o=document.createElement('option');o.value=d;o.textContent=d;dayEl.append(o);}
+  const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  m.forEach((x,i)=>{let o=document.createElement('option');o.value=i+1;o.textContent=x;monthEl.append(o);});
+  const yN=new Date().getFullYear();
+  for(let y=yN;y>=yN-60;y--){let o=document.createElement('option');o.value=y;o.textContent=y;yearEl.append(o);}
+}
+function getData(){return JSON.parse(localStorage.getItem('medicalData')||'[]');}
+function saveData(d){localStorage.setItem('medicalData',JSON.stringify(d));}
+function render(){
+  const arr=getData();
+  if(!arr.length){wrap.innerHTML='<div class="no-data">No medical records yet.</div>';return;}
+  let html='<table><tr><th>Date</th><th>Issue</th><th>Description</th><th>Action</th></tr>';
+  arr.forEach((r,i)=>{
+    html+=`<tr>
+      <td>${r.day}-${r.month}-${r.year}</td>
+      <td>${r.issue}</td>
+      <td>${r.desc}</td>
+      <td><button class='btn btn-danger' onclick='del(${i})'>Delete</button></td>
+    </tr>`;
+  });
+  html+='</table>';
+  wrap.innerHTML=html;
+}
+function del(i){const a=getData();a.splice(i,1);saveData(a);render();}
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const issue=document.getElementById('issue').value;
+  const desc=document.getElementById('description').value;
+  const r={day:dayEl.value,month:monthEl.value,year:yearEl.value,issue,desc};
+  const arr=getData();arr.unshift(r);saveData(arr);form.reset();render();
+});
+populateDate();render();
+</script>
+</body>
+</html>

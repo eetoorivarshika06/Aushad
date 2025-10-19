@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phone Auth - Aushad</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #e0f7fa; /* Light teal background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      position: relative;
+      color: #004d40;
+    }
+
+    /* Aushad logo top-left */
+    header {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 20;
+      user-select: none;
+    }
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+    .brand-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #004d40;
+    }
+
+    .capsule {
+      position: absolute;
+      border-radius: 12px;
+      width: 30px;
+      height: 14px;
+      background: linear-gradient(90deg, #26a69a 50%, #80cbc4 50%);
+      opacity: 0.15;
+      animation: floatUp 15s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0.1; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(-30vh); opacity: 0.1; }
+    }
+
+    .auth-container {
+      position: relative;
+      z-index: 10;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 77, 64, 0.1);
+      width: 320px;
+      text-align: center;
+    }
+
+    #message {
+      color: #26a69a;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      min-height: 1.5rem;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #26a69a;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      background-color: #26a69a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Aushad logo with three connected leaves">
+      <!-- Central leaf -->
+      <path d="M32 4C24 20 24 44 32 60C40 44 40 20 32 4Z" fill="#26a69a" />
+      <!-- Left leaf -->
+      <path d="M16 24C10 28 8 38 14 44C20 38 19 28 16 24Z" fill="#80cbc4" />
+      <!-- Right leaf -->
+      <path d="M48 24C54 28 56 38 50 44C44 38 45 28 48 24Z" fill="#80cbc4" />
+      <!-- Connecting lines -->
+      <line x1="22" y1="34" x2="42" y2="34" stroke="#004d40" stroke-width="2" />
+      <line x1="32" y1="4" x2="32" y2="60" stroke="#004d40" stroke-width="2" />
+    </svg>
+    <div class="brand-name">Aushad</div>
+  </header>
+
+  <div id="message"></div>
+
+  <div class="auth-container">
+    <h2>Login with Phone Number</h2>
+    <div id="recaptcha-container"></div>
+
+    <input type="text" id="phoneNumber" placeholder="+91xxxxxxxxxx" />
+    <button id="sendCode">Send OTP</button>
+
+    <input type="text" id="otpCode" placeholder="Enter OTP" />
+    <button id="verifyCode">Verify OTP</button>
+  </div>
+
+  <script type="module" src="./signup.js"></script>
+
+  <script>
+    // Add floating capsules for subtle background effect
+    for (let i = 0; i < 40; i++) {
+      const capsule = document.createElement('div');
+      capsule.classList.add('capsule');
+      capsule.style.left = (Math.random() * 100) + 'vw';
+      capsule.style.top = (Math.random() * 100) + 'vh';
+      capsule.style.animationDelay = (Math.random() * 15) + 's';
+      capsule.style.opacity = 0.1 + Math.random() * 0.15;
+      document.body.appendChild(capsule);
+    }
+  </script>
+
+</body>
+</html>

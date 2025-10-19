@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aushad - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+  /* (All your original CSS exactly as before) */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #004d40;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  nav {
+    background: #004d40;
+    padding: 0.8rem 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    user-select: none;
+  }
+  nav a {
+    color: #a7ffeb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  nav a:hover, nav a:focus { color: #26a69a; }
+  nav a .emoji { font-size: 24px; line-height: 1; transition: color 0.3s; }
+  nav a:hover .emoji, nav a:focus .emoji { color: #26a69a; }
+  .double-line { width: 100%; border-top: 4px double #004d40; margin: 0; }
+  main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  .logo-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; animation: fadeInScale 1.6s ease forwards; z-index: 10; }
+  .logo-svg { width: 80px; height: 80px; fill: #26a69a; stroke: #004d40; stroke-width: 2; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); }
+  header { display: flex; flex-direction: column; align-items: center; margin-top: 2rem; padding: 1rem; }
+  .header-brand { display: flex; align-items: center; gap: 15px; }
+  .brand-title { font-size: 3rem; font-weight: 900; color: #004d40; letter-spacing: 3px; }
+  .subtitle {
+    margin-top: 0.5rem;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #00796b;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #00796b;
+    width: 0;
+    animation: typing 3.5s steps(20, end) forwards, blink-caret 0.75s step-end 4;
+    user-select: none;
+  }
+  .capsule {
+    position: fixed;
+    border-radius: 12px;
+    width: 30px;
+    height: 14px;
+    background: linear-gradient(90deg, #26a69a 50%, #80cbc4 50%);
+    opacity: 0.15;
+    animation: floatUp 15s linear infinite;
+    z-index: 1;
+  }
+  .info-section {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    align-items: stretch; gap: 2.5rem;
+    padding: 5rem 3rem;
+    background: linear-gradient(180deg, #e0f2f1 0%, #ffffff 100%);
+  }
+  .info-box {
+    background: #ffffff;
+    border-radius: 25px;
+    width: 43%;
+    min-width: 350px;
+    padding: 2rem 2.2rem;
+    box-shadow: 0 8px 18px rgba(0, 77, 64, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+  .info-box:hover, .info-box:active {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 77, 64, 0.15);
+  }
+  .info-box h2 { color: #004d40; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700; }
+  .info-box p { color: #00695c; font-size: 1.05rem; line-height: 1.6; }
+  @media (max-width: 768px) { .info-box { width: 100%; } }
+  @keyframes typing { from { width: 0; } to { width: 22ch; } }
+  @keyframes blink-caret { 0%,100% { border-color: transparent; } 50% { border-color: #00796b; } }
+  @keyframes floatUp { 0% { transform: translateY(100vh); opacity: 0.1; } 50% { opacity: 0.3; } 100% { transform: translateY(-30vh); opacity: 0.1; } }
+  @keyframes fadeInScale { from { opacity: 0; transform: scale(0.85);} to {opacity:1; transform:scale(1);} }
+  @media (max-width: 480px) {
+    nav { gap: 1.5rem; padding: 0.6rem 1.5rem; flex-wrap: wrap; }
+    nav a { font-size: 1rem; width: 20%; gap: 0.2rem; }
+    .logo-svg { width: 90px; height: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="medicines.html"><span class="emoji">💊</span>Medicines</a>
+  <a href="appointments.html"><span class="emoji">📅</span>Appointments</a>
+  <a href="reports.html"><span class="emoji">📄</span>Reports</a>
+  <a href="medicalhistory.html"><span class="emoji">🩺</span>Medical History</a>
+  <a href="settings.html"><span class="emoji">⚙️</span>Settings</a>
+</nav>
+<hr class="double-line" />
+
+<main>
+  <div class="header-brand">
+    <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4C24 20 24 44 32 60C40 44 40 20 32 4Z" />
+      <path d="M16 24C10 28 8 38 14 44C20 38 19 28 16 24Z" fill="#80cbc4" />
+      <path d="M48 24C54 28 56 38 50 44C44 38 45 28 48 24Z" fill="#80cbc4" />
+      <line x1="22" y1="34" x2="42" y2="34" stroke="#004d40" stroke-width="2" />
+      <line x1="32" y1="4" x2="32" y2="60" stroke="#004d40" stroke-width="2" />
+    </svg>
+    <div class="brand-title">Aushad</div>
+    <div class="subtitle">-Your Health Companion</div>
+  </div>
+
+  <!-- 👇 Greeting area -->
+  <h2 id="greeting" style="margin-top:2rem; font-size:2rem; color:#004d40;"></h2>
+
+  <section class="info-section">
+    <div class="info-box">
+      <h2>💊 Medicines</h2>
+      <p>Stay on track with your health — get timely reminders to take your prescribed medicines and maintain consistency in your treatment. Let Aushad help you never miss a dose again.</p>
+    </div>
+    <div class="info-box">
+      <h2>📅 Appointments</h2>
+     <p>Schedule, manage, and remember all your doctor visits effortlessly. From now on, you’ll never miss an appointment — Aushad keeps your health commitments on time.</p>
+    </div>
+    <div class="info-box">
+      <h2>📄 Records</h2>
+      <p>Keep all your medical records organized and accessible in one secure place and view your reports whenever you need them.</p>
+    </div>
+    <div class="info-box">
+      <h2>🩺 Medical History</h2>
+      <p>Access your complete medical journey at a glance — view past illnesses, diagnoses, and treatments to help doctors understand your health better and faster.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  for (let i = 0; i < 40; i++) {
+    const capsule = document.createElement('div');
+    capsule.classList.add('capsule');
+    capsule.style.left = (Math.random() * 100) + 'vw';
+    capsule.style.top = (Math.random() * 100) + 'vh';
+    capsule.style.animationDelay = (Math.random() * 15) + 's';
+    capsule.style.opacity = 0.1 + Math.random() * 0.15;
+    document.body.appendChild(capsule);
+  }
+</script>
+
+<!-- 👇 Firebase Script Starts -->
+<!-- 👇 Firebase Script Starts -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAugy4VlQWqDtoyLJbw8vQQ-sAvbwvq8S0",
+    authDomain: "aushad-5208b.firebaseapp.com",
+    projectId: "aushad-5208b",
+    storageBucket: "aushad-5208b.firebasestorage.app",
+    messagingSenderId: "1083290584761",
+    appId: "1:1083290584761:web:b113f6e2eb6d4244123d68"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const greeting = document.getElementById("greeting");
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const storedName = localStorage.getItem("displayName");
+      if (storedName) {
+        greeting.innerText = `Namasthe ${storedName}🙏`;
+        return;
+      }
+
+      // fallback to Firestore
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        greeting.innerText = `Namasthe ${data.firstName || "User"}🙏`;
+        localStorage.setItem("displayName", data.firstName || "User");
+      } else {
+        greeting.innerText = "Namasthe 🙏";
+      }
+    } else {
+      window.location.href = "signin2.html";
+    }
+  });
+</script>
+<!-- 👆 Firebase Script Ends -->
+
+</body>
+</html>

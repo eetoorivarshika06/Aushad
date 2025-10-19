@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aushad - Medicines</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+  color: #004d40;
+  padding-bottom: 50px;
+}
+nav {
+  background: #004d40;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav a {
+  color: #a7ffeb;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+nav a:hover { color: #26a69a; }
+nav a .emoji { font-size: 20px; }
+
+hr.double-line { width: 100%; border-top: 4px double #004d40; margin: 0; }
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.container {
+  background: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1000px;
+  padding: 2rem;
+  box-shadow: 0 8px 18px rgba(0,77,64,0.1);
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #004d40;
+}
+
+form .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+input, textarea, select, button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid #b2dfdb;
+  font-size: 1rem;
+}
+
+input[type="time"] { width: 150px; }
+
+textarea { flex: 1; resize: vertical; min-height: 60px; }
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(90deg, #26a69a, #80cbc4);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 15px;
+  transition: 0.3s;
+}
+
+button:hover { background: linear-gradient(90deg, #00796b, #26a69a); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #b2dfdb;
+  padding: 8px;
+  text-align: center;
+}
+
+th { background: #004d40; color: #a7ffeb; }
+tr:nth-child(even) { background: #e0f2f1; }
+tr:hover { background: #b2dfdb; }
+
+.action-btn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.update-btn { background: #3b82f6; color: white; }
+.update-btn:hover { background: #2563eb; }
+.delete-btn { background: #e57373; color: white; }
+.delete-btn:hover { background: #d32f2f; }
+
+@media(max-width:700px){
+  .row { flex-direction: column; }
+  input, textarea { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+<nav>
+  <a href="home.html"><span class="emoji">🏠</span>Home</a>
+  <a href="medicines.html"><span class="emoji">💊</span>Medicines</a>
+  <a href="appointments.html"><span class="emoji">📅</span>Appointments</a>
+  <a href="reports.html"><span class="emoji">📄</span>Reports</a>
+  <a href="medicalhistory.html"><span class="emoji">🩺</span>Medical History</a>
+  <a href="settings.html"><span class="emoji">⚙️</span>Settings</a>
+</nav>
+<hr class="double-line" />
+
+<main>
+  <div class="container">
+    <h2>Medicine Schedule</h2>
+
+    <form id="medicineForm">
+      <div class="row">
+        <input type="text" id="medName" placeholder="Medicine Name" required>
+        <input type="date" id="medStartDate" required>
+        <input type="time" id="medTime" required>
+        <input type="number" id="medDays" placeholder="Days" min="1" required>
+      </div>
+      <div class="row">
+        <textarea id="medDesc" placeholder="Description"></textarea>
+      </div>
+      <div class="row">
+        <button type="submit">Add Medicine</button>
+      </div>
+    </form>
+
+    <div id="medicineTable"></div>
+  </div>
+</main>
+
+<script>
+let medicines = [];
+
+function renderTable() {
+  const tableDiv = document.getElementById('medicineTable');
+  if(!medicines.length){
+    tableDiv.innerHTML = "<p style='text-align:center;color:#00796b;'>No medicines added yet.</p>";
+    return;
+  }
+  let html = `<table>
+    <tr>
+      <th>Name</th>
+      <th>Start Date</th>
+      <th>Time</th>
+      <th>Days</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>`;
+  medicines.forEach((m, i)=>{
+    html += `<tr>
+      <td>${m.name}</td>
+      <td>${m.date}</td>
+      <td>${m.time}</td>
+      <td>${m.days}</td>
+      <td>${m.desc}</td>
+      <td>
+        <button class="action-btn update-btn" onclick="editMedicine(${i})">Update</button>
+        <button class="action-btn delete-btn" onclick="deleteMedicine(${i})">Delete</button>
+      </td>
+    </tr>`;
+  });
+  html += `</table>`;
+  tableDiv.innerHTML = html;
+}
+
+document.getElementById('medicineForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('medName').value.trim();
+  const date = document.getElementById('medStartDate').value;
+  const time = document.getElementById('medTime').value;
+  const days = document.getElementById('medDays').value;
+  const desc = document.getElementById('medDesc').value.trim();
+
+  if(!name || !date || !time || !days) return alert("Fill all required fields!");
+
+  medicines.push({name,date,time,days,desc});
+  renderTable();
+  this.reset();
+});
+
+function editMedicine(index){
+  const med = medicines[index];
+  document.getElementById('medName').value = med.name;
+  document.getElementById('medStartDate').value = med.date;
+  document.getElementById('medTime').value = med.time;
+  document.getElementById('medDays').value = med.days;
+  document.getElementById('medDesc').value = med.desc;
+  medicines.splice(index,1);
+  renderTable();
+}
+
+function deleteMedicine(index){
+  if(confirm("Delete this medicine?")){
+    medicines.splice(index,1);
+    renderTable();
+  }
+}
+
+renderTable();
+</script>
+</body>
+</html>

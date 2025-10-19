@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign In - Aushad</title>
+  <script type="module" src="signin2.js" defer></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #e0f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      position: relative;
+      color: #004d40;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .capsule {
+      position: absolute;
+      border-radius: 12px;
+      width: 30px;
+      height: 14px;
+      background: linear-gradient(90deg, #26a69a 50%, #80cbc4 50%);
+      opacity: 0.15;
+      animation: floatUp 15s linear infinite;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0.1; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(-30vh); opacity: 0.1; }
+    }
+    .auth-container {
+      position: relative;
+      z-index: 10;
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 77, 64, 0.1);
+      width: 350px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 1.5px;
+      color: #004d40;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      color: #00796b;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #26a69a;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      color: #004d40;
+    }
+    button {
+      width: 100%;
+      background-color: #26a69a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+    a {
+      color: #26a69a;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #004d40;
+    }
+    header {
+      position: fixed;
+      top: 20px;
+      left: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 20;
+      user-select: none;
+      background: transparent;
+    }
+    .logo { width: 50px; height: 50px; }
+    .brand-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4C24 20 24 44 32 60C40 44 40 20 32 4Z" fill="#26a69a" />
+      <path d="M16 24C10 28 8 38 14 44C20 38 19 28 16 24Z" fill="#80cbc4" />
+      <path d="M48 24C54 28 56 38 50 44C44 38 45 28 48 24Z" fill="#80cbc4" />
+      <line x1="22" y1="34" x2="42" y2="34" stroke="#004d40" stroke-width="2" />
+      <line x1="32" y1="4" x2="32" y2="60" stroke="#004d40" stroke-width="2" />
+    </svg>
+    <div class="brand-name">Aushad</div>
+  </header>
+
+  <div class="auth-container">
+    <h2>Sign In</h2>
+    <p>Login to access your account.</p>
+    <form id="signInForm">
+      <input type="email" id="sEmail" placeholder="Email" required />
+      <input type="password" id="sPassword" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+    </form>
+    <p>Don't have an account? <a href="signup2.html">Sign up</a></p>
+  </div>
+
+  <script>
+    for (let i = 0; i < 40; i++) {
+      const capsule = document.createElement('div');
+      capsule.classList.add('capsule');
+      capsule.style.left = (Math.random() * 100) + 'vw';
+      capsule.style.top = (Math.random() * 100) + 'vh';
+      capsule.style.animationDelay = (Math.random() * 15) + 's';
+      capsule.style.opacity = 0.1 + Math.random() * 0.15;
+      document.body.appendChild(capsule);
+    }
+  </script>
+</body>
+</html>

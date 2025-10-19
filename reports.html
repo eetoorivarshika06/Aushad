@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aushad - Patient Reports</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* 🌿 Base Styles */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+  color: #004d40;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* 🌟 Navbar (same as other pages) */
+nav {
+  background: #004d40;
+  padding: 0.8rem 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav a {
+  color: #a7ffeb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  transition: 0.3s;
+}
+nav a:hover { color: #26a69a; }
+nav a .emoji { font-size: 24px; }
+nav a:hover .emoji { color: #26a69a; }
+
+hr.double-line {
+  width: 100%;
+  border-top: 4px double #004d40;
+  margin: 0;
+}
+
+/* 🌿 Floating Capsules */
+.capsule {
+  position: fixed;
+  border-radius: 12px;
+  width: 25px;
+  height: 12px;
+  background: linear-gradient(90deg, #26a69a 50%, #80cbc4 50%);
+  opacity: 0.15;
+  animation: floatUp 15s linear infinite;
+  z-index: 1;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 0.1; }
+  50% { opacity: 0.3; }
+  100% { transform: translateY(-30vh); opacity: 0.1; }
+}
+
+/* 🌿 Container */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  z-index: 2;
+}
+
+/* 🩺 Heading */
+h2 {
+  text-align: center;
+  margin: 25px 0;
+  font-family: 'Pacifico', cursive;
+  font-size: 2.2rem;
+  color: #004d40;
+}
+
+/* 🧾 Form Section */
+form {
+  background: rgba(255,255,255,0.95);
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 8px 18px rgba(0,77,64,0.1);
+  margin-bottom: 30px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+  color: #004d40;
+}
+input, button {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  border: 1px solid #80cbc4;
+  width: 100%;
+}
+input:focus {
+  border-color: #26a69a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(38,166,154,0.3);
+}
+button {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* 🩸 Reports Grid */
+.report-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.report-item {
+  background: rgba(255,255,255,0.95);
+  border-radius: 25px;
+  box-shadow: 0 8px 18px rgba(0,77,64,0.1);
+  overflow: hidden;
+}
+.report-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #ccc;
+}
+.report-details {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.report-details div strong {
+  color: #26a69a;
+}
+
+@media(max-width:768px){
+  form .row { flex-direction: column; }
+  h2 { font-size: 1.8rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌿 Navbar -->
+<nav>
+  <a href="home.html"><span class="emoji">🏠</span>Home</a>
+  <a href="medicines.html"><span class="emoji">💊</span>Medicines</a>
+  <a href="appointments.html"><span class="emoji">📅</span>Appointments</a>
+  <a href="reports.html"><span class="emoji">📄</span>Reports</a>
+  <a href="medicalhistory.html"><span class="emoji">🩺</span>Medical History</a>
+  <a href="settings.html"><span class="emoji">⚙️</span>Settings</a>
+</nav>
+<hr class="double-line" />
+
+<div class="container">
+  <h2>📋 Patient Reports</h2>
+
+  <!-- Upload Form -->
+  <form id="reportForm">
+    <div class="row">
+      <div style="flex:1">
+        <label>Hospital Name</label>
+        <input type="text" id="hospital" placeholder="Hospital Name" required>
+      </div>
+      <div style="flex:1">
+        <label>Doctor Name</label>
+        <input type="text" id="doctor" placeholder="Doctor Name" required>
+      </div>
+    </div>
+    <div class="row">
+      <div style="flex:1">
+        <label>Date</label>
+        <input type="date" id="reportDate" required>
+      </div>
+      <div style="flex:1">
+        <label>Upload Report (Image)</label>
+        <input type="file" id="reportImage" accept="image/*" capture="environment" required>
+      </div>
+    </div>
+    <button type="submit">Add Report</button>
+  </form>
+
+  <!-- Reports Grid -->
+  <div class="report-list" id="reportList"></div>
+</div>
+
+<script>
+/* 🌿 Floating Capsules Animation */
+for(let i=0;i<40;i++){
+  const c=document.createElement('div');
+  c.className='capsule';
+  c.style.left=Math.random()*100+'vw';
+  c.style.top=Math.random()*100+'vh';
+  c.style.animationDelay=Math.random()*15+'s';
+  document.body.appendChild(c);
+}
+
+/* 📋 Add Reports Logic */
+const form = document.getElementById('reportForm');
+const reportList = document.getElementById('reportList');
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const hospital = document.getElementById('hospital').value;
+  const doctor = document.getElementById('doctor').value;
+  const date = document.getElementById('reportDate').value;
+  const imageFile = document.getElementById('reportImage').files[0];
+  if(!imageFile) return;
+
+  const reader = new FileReader();
+  reader.onload = function(event){
+    const imgSrc = event.target.result;
+    const reportItem = document.createElement('div');
+    reportItem.className = 'report-item';
+    reportItem.innerHTML = `
+      <img src="${imgSrc}" class="report-image" alt="Report Image">
+      <div class="report-details">
+        <div><strong>Hospital:</strong> ${hospital}</div>
+        <div><strong>Doctor:</strong> ${doctor}</div>
+        <div><strong>Date:</strong> ${date}</div>
+      </div>`;
+    reportList.prepend(reportItem);
+    form.reset();
+  }
+  reader.readAsDataURL(imageFile);
+});
+</script>
+</body>
+</html>

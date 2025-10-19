@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aushad - Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* 🌿 Aushad Unified Theme */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #004d40;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* 🌱 Navigation Bar */
+nav {
+  background: #004d40;
+  padding: 0.8rem 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  user-select: none;
+}
+nav a {
+  color: #a7ffeb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  padding: 0.3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+nav a:hover, nav a:focus { color: #26a69a; }
+nav a .emoji { font-size: 24px; line-height: 1; transition: color 0.3s; }
+nav a:hover .emoji, nav a:focus .emoji { color: #26a69a; }
+
+.double-line { width: 100%; border-top: 4px double #004d40; margin: 0; }
+
+/* 🌿 Floating Capsules */
+.capsule {
+  position: fixed;
+  border-radius: 12px;
+  width: 30px;
+  height: 14px;
+  background: linear-gradient(90deg, #26a69a 50%, #80cbc4 50%);
+  opacity: 0.15;
+  animation: floatUp 15s linear infinite;
+  z-index: 1;
+}
+
+/* 🧩 Main Container */
+.container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 25px;
+  box-shadow: 0 8px 18px rgba(0, 77, 64, 0.1);
+}
+
+/* 🧭 Headings */
+h1 {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  color: #004d40;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+}
+
+section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 77, 64, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 77, 64, 0.15);
+}
+h2 { color: #004d40; margin-bottom: 1.2rem; }
+
+/* 🔘 Inputs & Buttons */
+input, select {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #80cbc4;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: 0.3s;
+}
+input:focus, select:focus {
+  border-color: #26a69a;
+  outline: none;
+  box-shadow: 0 0 5px rgba(38, 166, 154, 0.4);
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 1rem;
+  transition: 0.3s;
+}
+.update-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+.update-btn:hover { opacity: 0.9; }
+.danger-btn {
+  background: #f87171;
+  color: white;
+}
+.danger-btn:hover { opacity: 0.9; }
+
+/* 🔘 Toggle Switches */
+.toggle-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 1.2rem;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #d1fae5;
+  transition: .4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 28px;
+  width: 28px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider { background: #10b981; }
+input:checked + .slider:before { transform: translateX(26px); }
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 0.1; }
+  50% { opacity: 0.3; }
+  100% { transform: translateY(-30vh); opacity: 0.1; }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 1.5rem; }
+  h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- 🔝 Navigation -->
+<nav>
+  <a href="home.html"><span class="emoji">🏠</span>Home</a>
+  <a href="medicines.html"><span class="emoji">💊</span>Medicines</a>
+  <a href="appointments.html"><span class="emoji">📅</span>Appointments</a>
+  <a href="reports.html"><span class="emoji">📄</span>Reports</a>
+  <a href="medicalhistory.html"><span class="emoji">🩺</span>Medical History</a>
+  <a href="settings.html"><span class="emoji">⚙️</span>Settings</a>
+</nav>
+<hr class="double-line" />
+
+<!-- 🌿 Settings Content -->
+<div class="container">
+  <h1>⚙️ Settings</h1>
+
+  <section>
+    <h2>👤 Profile</h2>
+    <input type="text" placeholder="Full Name" required>
+    <select required>
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+    <input type="number" placeholder="Age" required>
+    <select required>
+      <option value="">Blood Group</option>
+      <option>A+</option><option>A-</option><option>B+</option>
+      <option>B-</option><option>O+</option><option>O-</option>
+      <option>AB+</option><option>AB-</option>
+    </select>
+    <input type="password" placeholder="Change Password">
+    <button class="update-btn">Update Profile</button>
+  </section>
+
+  <section>
+    <h2>🔔 Preferences</h2>
+    <div class="toggle-label">
+      <span>Medicine Reminders</span>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle-label">
+      <span>Appointment Reminders</span>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <h2>⚠️ Account Actions</h2>
+    <button class="update-btn" onclick="logout()">Logout</button>
+    <button class="danger-btn" onclick="deleteAccount()">Delete Account</button>
+  </section>
+</div>
+
+<script>
+  // Floating capsules background
+  for (let i = 0; i < 40; i++) {
+    const capsule = document.createElement('div');
+    capsule.classList.add('capsule');
+    capsule.style.left = Math.random() * 100 + 'vw';
+    capsule.style.top = Math.random() * 100 + 'vh';
+    capsule.style.animationDelay = Math.random() * 15 + 's';
+    capsule.style.opacity = 0.1 + Math.random() * 0.15;
+    document.body.appendChild(capsule);
+  }
+
+  // ✅ Logout redirects to login page
+  function logout() {
+    alert("You have been logged out.");
+    window.location.href = "login.html"; // Redirect to login page
+  }
+
+  function deleteAccount() {
+    if (confirm("Are you sure you want to delete your account? This cannot be undone.")) {
+      alert("Your account has been deleted.");
+    }
+  }
+</script>
+
+</body>
+</html>
